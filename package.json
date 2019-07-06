@@ -1,0 +1,22 @@
+{
+  "name": "formio-server-proxy",
+  "version": "1.0.0",
+  "description": "A proxy server that surrounds the Form.io Enterprise server.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node proxy.js",
+    "build": "VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && docker build --squash --build-arg CACHE_DATE=$(date +%s) -t formio/formio-server-proxy:$VERSION .;docker build --squash --build-arg CACHE_DATE=$(date +%s) -t formio/formio-server-proxy:latest .;",
+    "publish": "VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]');docker push formio/formio-server-proxy:$VERSION;docker push formio/formio-server-proxy:latest;",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^3.1.0",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^0.19.1",
+    "method-override": "^3.0.0"
+  }
+}

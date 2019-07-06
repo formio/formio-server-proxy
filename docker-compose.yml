@@ -1,0 +1,52 @@
+version: '3.7'
+services:
+  mongo:
+    image: mongo:4.1
+    restart: always
+    volumes:
+      - mdb-data:/data/db
+    networks:
+      formio:
+        aliases:
+          - mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME:
+      MONGO_INITDB_ROOT_PASSWORD:
+  redis:
+    image: redis
+    networks:
+      formio:
+        aliases:
+          - redis
+  formio:
+    image: formio/formio-enterprise
+    restart: always
+    ports:
+      - "3000:80"
+    networks:
+      formio:
+        aliases:
+          - formio
+    environment:
+      PRIMARY: 1
+      ADMIN_EMAIL: admin@example.com
+      ADMIN_PASS: CHANGEME
+      JWT_SECRET: CHANGEME
+      DB_SECRET: CHANGEME
+      LICENSE:
+  formio-proxy:
+    image: formio/formio-server-proxy
+    restart: always
+    ports:
+      - "3010:80"
+    networks:
+      formio:
+        aliases:
+          - proxy
+    environment:
+      PROXY: http://formio
+      PROXY_PORT: 80
+networks:
+  formio:
+volumes:
+  mdb-data:
