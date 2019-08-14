@@ -43,7 +43,8 @@ module.exports = {
           catch (err) {
             return next(err);
           }
-        });
+        })
+        .catch(next);
     },
     (req, res, next) => {
       console.log('Before proxy 2 called');
