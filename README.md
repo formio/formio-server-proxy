@@ -1,3 +1,13 @@
+## This repository is now considered legacy and no longer supported. It has been replaced with our efforts with the App Server @ https://github.com/formio/appserver
+
+## Please take a look at our recent repositories and help documentation at the following links.
+ - https://help.form.io
+ - https://github.com/formio/formio.js
+ - https://github.com/formio/formio
+ - https://github.com/formio/react
+ - https://github.com/formio/angular
+ - https://github.com/formio/vue
+
 # Form.io Enterprise Server Proxy
 A proxy server for the Form.io Enterprise Server. This allows you to write your own custom middleware around the Enterprise API's which enable things like.
 
